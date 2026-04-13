@@ -1,0 +1,7 @@
+# Exclude packaged modules
+*.zip
+
+# Exclude .NET assemblies from source
+*.dll
+
+# End of https://mrkandreev.name/snippets/gitignore-generator/#PowerShell
