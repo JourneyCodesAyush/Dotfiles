@@ -27,7 +27,7 @@ Currently contains Windows setup only - more platforms may be added later (when 
 **2. Install packages**
 
 ```powershell
-.\windows\packages.ps1
+.\windows\choco-packages.ps1
 ```
 
 **3. Install npm globals**
