@@ -6,6 +6,7 @@ choco install -y
 choco install brave  -y
 choco install cmake  -y
 choco install fzf  -y
+choco install fd -y
 choco install git  -y
 choco install github-desktop  -y
 choco install googlechrome  -y
@@ -22,4 +23,4 @@ choco install ripgrep  -y
 choco install vscode  -y
 choco install zig -y
 
-# choco install brave cmake fzf git github-desktop googlechrome make mingw mysql neovim nodejs oh-my-posh openjdk powershell-core python ripgrep vscode zig -y
+# choco install brave cmake fzf fd git github-desktop googlechrome make mingw mysql neovim nodejs oh-my-posh openjdk powershell-core python ripgrep vscode zig -y
