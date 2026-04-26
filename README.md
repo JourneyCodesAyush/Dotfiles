@@ -33,7 +33,7 @@ Currently contains Windows setup only - more platforms may be added later (when 
 **3. Install npm globals**
 
 ```powershell
-.\windows\npm-packages.ps1
+.\windows\global-package.ps1
 ```
 
 **4. Create symlinks**
