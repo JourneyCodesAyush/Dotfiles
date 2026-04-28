@@ -90,6 +90,7 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "json.suggest.trailingCommas": false,
   "chat.disableAIFeatures": true,
   "zig.zls.enabled": "on",
   "zig.path": "zig",
