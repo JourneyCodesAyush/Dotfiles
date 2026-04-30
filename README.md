@@ -30,7 +30,7 @@ Currently contains Windows setup only - more platforms may be added later (when 
 .\windows\choco-packages.ps1
 ```
 
-**3. Install npm globals**
+**3. Install global packages**
 
 ```powershell
 .\windows\global-package.ps1
