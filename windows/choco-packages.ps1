@@ -21,7 +21,8 @@ choco install openjdk  -y
 choco install powershell-core  -y
 choco install python  -y
 choco install ripgrep  -y
+choco install vlc -y
 choco install vscode  -y
 choco install zig -y
 
-# choco install brave cmake fzf fd git github-desktop googlechrome make maven mingw mysql neovim nodejs oh-my-posh openjdk powershell-core python ripgrep vscode zig -y
+# choco install brave cmake fzf fd git github-desktop googlechrome make maven mingw mysql neovim nodejs oh-my-posh openjdk powershell-core python ripgrep vlc vscode zig -y
