@@ -7,27 +7,28 @@
   "editor.fontLigatures": true,
   "editor.formatOnSave": true,
   "editor.inlineSuggest.fontFamily": "default",
-  "editor.lineNumbers": "relative",
+  "editor.lineNumbers": "on",
   "code-runner.runInTerminal": true,
   "code-runner.saveFileBeforeRun": true,
   "debug.terminal.clearBeforeReusing": true,
   "code-runner.clearPreviousOutput": true,
   "workbench.editorAssociations": {
-    "*.log": "default"
+    "*.log": "default",
   },
+  "C_Cpp.dimInactiveRegions": true,
   "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter"
+    "editor.defaultFormatter": "ms-python.black-formatter",
   },
   "emmet.includeLanguages": {
     "ejs": "html",
-    "javascript": "javascriptreact"
+    "javascript": "javascriptreact",
   },
   "workbench.settings.applyToAllProfiles": ["editor", "terminal", "files"],
   "editor.cursorStyle": "underline",
-  "editor.cursorBlinking": "phase",
+  "editor.cursorBlinking": "smooth",
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.indentation": true,
   "terminal.integrated.shellIntegration.enabled": true,
@@ -39,11 +40,11 @@
   "terminal.integrated.defaultProfile.windows": "PowerShell 7",
   "terminal.integrated.profiles.windows": {
     "PowerShell 7": {
-      "path": "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
-    }
+      "path": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+    },
   },
   "[javascript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
+    "editor.defaultFormatter": "vscode.typescript-language-features",
   },
   "files.autoSave": "afterDelay",
   "files.eol": "\n",
@@ -56,45 +57,67 @@
   "workbench.colorTheme": "Best Themes - Ayu Darkvenom",
   "window.newWindowProfile": "Default",
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "python.analysis.typeCheckingMode": "standard",
   "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "makefile.configureOnOpen": true,
   "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[cpp]": {
     "editor.defaultFormatter": "ms-vscode.cpptools",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
   },
   "[c]": {
     "editor.defaultFormatter": "ms-vscode.cpptools",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
   },
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "files.readonlyInclude": {
     "**/.cargo/registry/src/**/*.rs": true,
     "**/.cargo/git/checkouts/**/*.rs": true,
-    "**/lib/rustlib/src/rust/library/**/*.rs": true
+    "**/lib/rustlib/src/rust/library/**/*.rs": true,
   },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "json.suggest.trailingCommas": false,
   "chat.disableAIFeatures": true,
   "zig.zls.enabled": "on",
   "zig.path": "zig",
   "editor.unicodeHighlight.invisibleCharacters": false,
-  "telemetry.telemetryLevel": "off"
+  "telemetry.telemetryLevel": "off",
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true,
+    "**/env": true,
+    "**/venv": true
+  },
+  "files.watcherExclude": {
+     "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/env/**": true,
+    "**/venv/**": true,
+    "env-*": true
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true
+  }
 }
