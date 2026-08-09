@@ -24,13 +24,31 @@ jobs:
 
       - name: Validate JSON
         run: |
-          find . -type f -name '*.json' -not -path './.git/*' -print0 |
-            xargs -0 -r -n1 jq empty
+          files=$(find . -type f -name '*.json' -not -path './.git/*')
+
+          if [ -z "$files" ]; then
+            echo "No JSON files found, skipping."
+            exit 0
+          fi
+
+          while IFS= read -r file; do
+            echo "Validating: $file"
+            jq empty "$file"
+          done <<< "$files"
 
       - name: Validate XML
         run: |
-          find . -type f -name '*.xml' -not -path './.git/*' -print0 |
-            xargs -0 -r -n1 xmllint --noout
+          files=$(find . -type f -name '*.xml' -not -path './.git/*')
+
+          if [ -z "$files" ]; then
+            echo "No XML files found, skipping."
+            exit 0
+          fi
+
+          while IFS= read -r file; do
+            echo "Validating: $file"
+            xmllint --noout "$file"
+          done <<< "$files"
 
       - name: Validate YAML
         run: |
@@ -38,10 +56,20 @@ jobs:
           import pathlib
           import yaml
 
-          for path in pathlib.Path(".").rglob("*.y*ml"):
-              if ".git" in path.parts:
-                  continue
+          files = [
+              path
+              for path in pathlib.Path(".").rglob("*")
+              if path.is_file()
+              and path.suffix in {".yml", ".yaml"}
+              and ".git" not in path.parts
+          ]
 
+          if not files:
+              print("No YAML files found, skipping.")
+              raise SystemExit(0)
+
+          for path in files:
+              print(f"Validating: {path}")
               with path.open() as f:
                   yaml.safe_load(f)
 
@@ -50,33 +78,49 @@ jobs:
 
       - name: Validate shell scripts
         run: |
-          find . -type f -name '*.sh' -not -path './.git/*' -print0 |
-            xargs -0 -r -n1 shellcheck
+          files=$(find . -type f -name '*.sh' -not -path './.git/*')
+
+          if [ -z "$files" ]; then
+            echo "No shell scripts found, skipping."
+            exit 0
+          fi
+
+          while IFS= read -r file; do
+            echo "Validating: $file"
+            shellcheck "$file"
+          done <<< "$files"
 
       - name: Validate PowerShell
         shell: pwsh
         run: |
+          $files = Get-ChildItem -Recurse -File -Filter *.ps1 |
+            Where-Object { $_.FullName -notmatch '[\\/]\.git[\\/]' }
+
+          if (-not $files) {
+            Write-Host "No PowerShell files found, skipping."
+            exit 0
+          }
+
           $failed = $false
 
-          Get-ChildItem -Recurse -Filter *.ps1 |
-            Where-Object { $_.FullName -notmatch '/\.git/' } |
-            ForEach-Object {
-              $tokens = $null
-              $errors = $null
+          foreach ($file in $files) {
+            $tokens = $null
+            $errors = $null
 
-              [System.Management.Automation.Language.Parser]::ParseFile(
-                $_.FullName,
-                [ref]$tokens,
-                [ref]$errors
-              )
+            [System.Management.Automation.Language.Parser]::ParseFile(
+              $file.FullName,
+              [ref]$tokens,
+              [ref]$errors
+            )
 
-              if ($errors) {
-                Write-Error "Syntax errors found in $($_.FullName)"
-                $failed = $true
-              } else {
-                Write-Host "OK: $($_.FullName)"
-              }
+            if ($errors) {
+              Write-Error "Syntax errors found in $($file.FullName)"
+              $failed = $true
             }
+            else {
+              Write-Host "OK: $($file.FullName)"
+            }
+          }
 
           if ($failed) {
             exit 1
@@ -84,5 +128,14 @@ jobs:
 
       - name: Validate Lua
         run: |
-          find . -type f -name '*.lua' -not -path './.git/*' -print0 |
-            xargs -0 -r -n1 luac5.4 -p
+          files=$(find . -type f -name '*.lua' -not -path './.git/*')
+
+          if [ -z "$files" ]; then
+            echo "No Lua files found, skipping."
+            exit 0
+          fi
+
+          while IFS= read -r file; do
+            echo "Validating: $file"
+            luac5.4 -p "$file"
+          done <<< "$files"
