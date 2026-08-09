@@ -1,0 +1,88 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            jq \
+            libxml2-utils \
+            shellcheck \
+            python3-yaml \
+            lua5.4
+
+      - name: Validate JSON
+        run: |
+          find . -type f -name '*.json' -not -path './.git/*' -print0 |
+            xargs -0 -r -n1 jq empty
+
+      - name: Validate XML
+        run: |
+          find . -type f -name '*.xml' -not -path './.git/*' -print0 |
+            xargs -0 -r -n1 xmllint --noout
+
+      - name: Validate YAML
+        run: |
+          python3 - <<'PY'
+          import pathlib
+          import yaml
+
+          for path in pathlib.Path(".").rglob("*.y*ml"):
+              if ".git" in path.parts:
+                  continue
+
+              with path.open() as f:
+                  yaml.safe_load(f)
+
+              print(f"OK: {path}")
+          PY
+
+      - name: Validate shell scripts
+        run: |
+          find . -type f -name '*.sh' -not -path './.git/*' -print0 |
+            xargs -0 -r -n1 shellcheck
+
+      - name: Validate PowerShell
+        shell: pwsh
+        run: |
+          $failed = $false
+
+          Get-ChildItem -Recurse -Filter *.ps1 |
+            Where-Object { $_.FullName -notmatch '/\.git/' } |
+            ForEach-Object {
+              $tokens = $null
+              $errors = $null
+
+              [System.Management.Automation.Language.Parser]::ParseFile(
+                $_.FullName,
+                [ref]$tokens,
+                [ref]$errors
+              )
+
+              if ($errors) {
+                Write-Error "Syntax errors found in $($_.FullName)"
+                $failed = $true
+              } else {
+                Write-Host "OK: $($_.FullName)"
+              }
+            }
+
+          if ($failed) {
+            exit 1
+          }
+
+      - name: Validate Lua
+        run: |
+          find . -type f -name '*.lua' -not -path './.git/*' -print0 |
+            xargs -0 -r -n1 luac5.4 -p
