@@ -1,0 +1,170 @@
+# Alacritty 0.17.0
+# Windows + PowerShell 7
+# Carbonfox
+# JetBrainsMono Nerd Font
+
+
+# ============================================================
+# GENERAL
+# ============================================================
+
+[general]
+
+live_config_reload = true
+
+
+# ============================================================
+# WINDOW
+# ============================================================
+
+[window]
+
+padding = { x = 12, y = 10 }
+
+decorations = "Full"
+
+startup_mode = "Maximized"
+
+opacity = 1.0
+
+decorations_theme_variant = "Dark"
+
+dynamic_title = true
+
+
+# ============================================================
+# FONT
+# ============================================================
+
+[font]
+
+normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
+bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }
+italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
+bold_italic = { family = "JetBrainsMono Nerd Font", style = "Bold Italic" }
+
+size = 13.0
+
+offset = { x = 0, y = 1 }
+
+builtin_box_drawing = true
+
+
+# ============================================================
+# COLORS
+# Carbonfox — Nightfox palette
+# ============================================================
+
+[colors]
+
+[colors.primary]
+
+background = "#0c0c0c"
+foreground = "#f2f4f8"
+
+
+[colors.cursor]
+
+text = "#0c0c0c"
+cursor = "#f2f4f8"
+
+
+[colors.selection]
+
+text = "#f2f4f8"
+background = "#2a2a2a"
+
+
+[colors.normal]
+
+black = "#282828"
+red = "#ee5396"
+green = "#25be6a"
+yellow = "#08bdba"
+blue = "#78a9ff"
+magenta = "#be95ff"
+cyan = "#33b1ff"
+white = "#dfdfe0"
+
+
+[colors.bright]
+
+black = "#484848"
+red = "#f16da6"
+green = "#46c880"
+yellow = "#2dc7c4"
+blue = "#8cb6ff"
+magenta = "#c8a5ff"
+cyan = "#52bdff"
+white = "#e4e4e5"
+
+
+# ============================================================
+# CURSOR
+# ============================================================
+
+[cursor]
+
+style = { shape = "Block", blinking = "On" }
+
+blink_interval = 500
+
+blink_timeout = 5
+
+unfocused_hollow = true
+
+
+# ============================================================
+# SCROLLING
+# ============================================================
+
+[scrolling]
+
+history = 10000
+
+multiplier = 3
+
+
+# ============================================================
+# SELECTION
+# ============================================================
+
+[selection]
+
+save_to_clipboard = true
+
+
+# ============================================================
+# TERMINAL
+# ============================================================
+
+[terminal]
+
+shell = { program = "C:\\Program Files\\PowerShell\\7\\pwsh.exe", args = [
+    "-NoLogo",
+    "-NoProfile",
+] }
+
+osc52 = "OnlyCopy"
+
+
+# ============================================================
+# MOUSE
+# ============================================================
+
+[mouse]
+
+hide_when_typing = true
+
+
+# ============================================================
+# KEYBOARD
+# ============================================================
+
+[keyboard]
+
+bindings = [
+    { key = "C", mods = "Control|Shift", action = "Copy" },
+    { key = "V", mods = "Control|Shift", action = "Paste" },
+    { key = "F", mods = "Control|Shift", action = "SearchForward" },
+]
