@@ -30,3 +30,17 @@ New-Item -ItemType SymbolicLink `
     -Target $nvimSource `
     -Force
 
+# Alacritty
+
+$alacrittySource = "$repo\alacritty\alacritty.toml"
+$alacrittyTarget = "$env:APPDATA\alacritty\alacritty.toml"
+
+New-Item -ItemType Directory `
+    -Path "$env:APPDATA\alacritty" `
+    -Force | Out-Null
+
+New-Item -ItemType SymbolicLink `
+    -Path $alacrittyTarget `
+    -Target $alacrittySource `
+    -Force
+
