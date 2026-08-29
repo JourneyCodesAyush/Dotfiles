@@ -30,7 +30,13 @@ Currently contains Windows setup only - more platforms may be added later (when 
 .\windows\choco-packages.ps1
 ```
 
-**3. Install global packages**
+**3. Install WinGet packages**
+
+```powershell
+winget import -i .\windows\winget.json
+```
+
+**4. Install global packages**
 
 ```powershell
 .\windows\global-package.ps1
