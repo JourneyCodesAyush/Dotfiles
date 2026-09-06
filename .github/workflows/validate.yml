@@ -148,3 +148,30 @@ jobs:
             echo "Validating: $file"
             luac5.4 -p "$file"
           done <<< "$files"
+
+      - name: Validate TOML
+        run: |
+          python3 - <<'PY'
+          import pathlib
+          import tomllib
+
+          files = [
+              path
+              for path in pathlib.Path(".").rglob("*")
+              if path.is_file()
+              and path.suffix.lower() == ".toml"
+              and ".git" not in path.parts
+          ]
+
+          if not files:
+              print("No TOML files found, skipping.")
+              raise SystemExit(0)
+
+          for path in files:
+              print(f"Validating: {path}")
+              with path.open("rb") as f:
+                  tomllib.load(f)
+
+              print(f"OK: {path}")
+          PY
+
