@@ -44,3 +44,31 @@ New-Item -ItemType SymbolicLink `
     -Target $alacrittySource `
     -Force
 
+
+# PowerShell 7 Profile
+
+$profileSource = "$repo\windows\Microsoft.PowerShell_profile.ps1"
+$profileTarget = $PROFILE.CurrentUserCurrentHost
+
+New-Item -ItemType Directory `
+    -Path (Split-Path $profileTarget -Parent) `
+    -Force | Out-Null
+
+# Back up existing profile before replacing it
+if (Test-Path $profileTarget) {
+    $existingItem = Get-Item $profileTarget
+
+    if ($existingItem.LinkType -ne "SymbolicLink") {
+        Copy-Item $profileTarget "$profileTarget.bak" -Force
+        Remove-Item $profileTarget -Force
+    }
+    else {
+        Remove-Item $profileTarget -Force
+    }
+}
+
+# Create symbolic link
+New-Item -ItemType SymbolicLink `
+    -Path $profileTarget `
+    -Target $profileSource `
+    -Force | Out-Null

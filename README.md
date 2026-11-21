@@ -7,7 +7,7 @@ Currently contains Windows setup only - more platforms may be added later (when 
 
 ## What's inside
 
-- `windows/` - PowerShell scripts for setting up a new Windows machine
+- `windows/` - PowerShell scripts and PowerShell profile for setting up a new Windows machine
 - `nvim/` - Neovim config (LazyVim)
 - `vscode/` - VS Code settings and extensions list
 
